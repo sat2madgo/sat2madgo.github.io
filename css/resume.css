@@ -198,6 +198,7 @@ a:hover, a:focus, a:active {
     background-position: center;
     background-size: cover;
     margin-bottom: -200px;
+		margin-top: -300px;
 }
 
 @media (min-width: 992px) {
