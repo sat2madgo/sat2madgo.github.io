@@ -1124,3 +1124,11 @@ body.lb-disable-scrolling {
 .show{
 	visibility:visible;
 }
+
+.center {
+    text-align: center;
+}
+.name {
+    font-family: 'Great Vibes', cursive;
+    font-size: 35px;
+}
