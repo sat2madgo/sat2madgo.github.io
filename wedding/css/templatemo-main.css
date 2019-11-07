@@ -493,7 +493,7 @@ footer em {
   }
 .panel-date{
 	margin-left: 40px;
-    float: none;
+    float: none !important;
     margin-bottom: -10px;
 	}
   .baner-content h1 {
