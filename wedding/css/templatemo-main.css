@@ -491,7 +491,11 @@ footer em {
   .baner-content {
   /*  padding-top: 30vh;*/
   }
-
+.panel-date{
+	margin-left: 40px;
+    float: none;
+    margin-bottom: -10px;
+	}
   .baner-content h1 {
     font-size: 64px;
   }
