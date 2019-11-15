@@ -146,7 +146,7 @@ a:hover { color: #FF0; }
 .baner-content {
  /* padding-top: 30vh;*/
   text-align: center;
-  background-image: url(../img/1st-section.jpg);
+  background-image: url(../img/back2.jpg);
 }
 
 .baner-content h1 {
@@ -299,7 +299,7 @@ h4, .h4 {
   padding-left: 15px;
   padding-right: 15px;
   padding-top: 8vh;
-  background-image: url(../img/4th-section.jpg);
+  background-image: url(../img/back1.jpg);
   background-attachment: fixed;
   min-height: 100vh;
   background-size: cover;
