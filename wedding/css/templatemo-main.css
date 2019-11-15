@@ -303,7 +303,7 @@ h4, .h4 {
   background-attachment: fixed;
   min-height: 100vh;
   background-size: cover;
-  background-position: center center;
+  background-position: top right;
 }
 
 section {
