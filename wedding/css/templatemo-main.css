@@ -24,7 +24,10 @@ body {
 a { color: #3CC; }
 
 a:hover { color: #FF0; }
-
+.thanks{
+position: absolute;
+    bottom: 10vw;
+    width: 100%;}
 /*----------
   NAV
 ----------*/
@@ -143,7 +146,7 @@ a:hover { color: #FF0; }
 }
 
 .invi-content {
- /* padding-top: 30vh;*/
+  padding-top: 30vh;
   text-align: center;
   background-image: url(../img/back2.jpg);
 	min-height:100vh;
@@ -159,6 +162,8 @@ a:hover { color: #FF0; }
   text-align: center;
   background-image: url(../img/sunset.jpg);
 	min-height:100vh;
+	background-position: left center;
+    background-position-x: 17%;
 }
 .baner-content {
  /* padding-top: 30vh;*/
@@ -506,6 +511,9 @@ footer em {
 
 @media (max-width: 767px){
   
+	.invi-content {
+  padding-top: 0vh;
+	}
   .baner-content {
   /*  padding-top: 30vh;*/
   }
