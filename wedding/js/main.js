@@ -17,7 +17,7 @@ heartAnimation();
     $(window).scroll(function () {
     var st = $(this).scrollTop();
     top_header.each(function(){
-	   $(this).css({'background-position':'center calc(50% + '+(st*.5)+'px)'});
+	   $(this).css({'background-position':'center calc(50% + '+((st-this.offsetTop)*.5)+'px)'});
     });
     });
 
