@@ -154,7 +154,7 @@ position: absolute;
 .time-content {
   padding-top: 30vh;
   text-align: center;
-  background-image: url(../img/sunset.jpg);
+  background-image: url(../img/selfie.jpg);
 	
 }
 .thanks-content {
@@ -511,7 +511,16 @@ footer em {
 }
 
 @media (max-width: 767px){
-  
+  .time-content {
+  padding-top: 20vh;
+  text-align: center;
+  background-image: url(../img/potrait.jpg);
+	
+}
+	.the-heart-intruduction-content-txt {
+	height: auto;
+		    padding-bottom: 20px;
+	}
 	.invi-content {
   padding-top: 0vh;
 	}
@@ -1036,7 +1045,7 @@ body.lb-disable-scrolling {
 }
 .the-heart-intruduction-content-img img {
 	width: 409px;
-	height: 409px;
+	
 	border-radius: 100%;
 	background-color: #fdfafd;
 	border: 1px dotted #96327D;
@@ -1044,6 +1053,7 @@ body.lb-disable-scrolling {
 .the-heart-intruduction-content-txt {
     display: table-cell;
     vertical-align: middle;
+	height: 409px;
 }
 .the-heart-single-introduction:nth-child(even) .the-heart-spilt-container {
 	float: right;
