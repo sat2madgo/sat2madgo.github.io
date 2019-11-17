@@ -167,9 +167,9 @@ position: absolute;
 	background-size:cover;
 }
 .baner-content {
-  padding-top: 40vh;
+  padding-top: 30vh;
   text-align: center;
-  background-image: url(../img/back4.jpg);
+  background-image: url(../img/home.jpg);
 	min-height:100vh;
 }
 .baner-content h1 {
@@ -513,7 +513,7 @@ footer em {
 @media (max-width: 767px){
 	
 	.the-heart-welcome-content{
-	margin-top:0px;
+	margin-top:0px !important;
 }
   .time-content {
   padding-top: 0vh;
@@ -522,7 +522,7 @@ footer em {
 	
 }
 	.the-heart-intruduction-content-txt {
-	height: auto;
+	height: auto !important;
 		    padding-bottom: 20px;
 	}
 	.invi-content {
@@ -849,7 +849,13 @@ body.lb-disable-scrolling {
 }
 
 .pink-dot{
-	color: #f0394d; 
+	background-color: #f0394d; 
+	width: 12px;
+    height: 12px;
+    border-radius: 12px;
+    margin-bottom: 7px;
+    display: inline-block;
+
 }
 
 .banner-text.withlove{
@@ -1051,6 +1057,7 @@ body.lb-disable-scrolling {
 }
 .the-heart-intruduction-content-img {
 	text-align: right;
+	margin-bottom:50px;
 }
 .the-heart-intruduction-content-img img {
 	width: 409px;
