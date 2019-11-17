@@ -142,13 +142,24 @@ a:hover { color: #FF0; }
   background-size: cover;
 }
 
-
+.invi-content {
+ /* padding-top: 30vh;*/
+  text-align: center;
+  background-image: url(../img/back2.jpg);
+	min-height:100vh;
+}
+.thanks-content {
+ /* padding-top: 30vh;*/
+  text-align: center;
+  background-image: url(../img/back5.jpg);
+	min-height:100vh;
+}
 .baner-content {
  /* padding-top: 30vh;*/
   text-align: center;
   background-image: url(../img/back4.jpg);
+	min-height:100vh;
 }
-
 .baner-content h1 {
   margin-top: 0px;
   font-size: 128px;
