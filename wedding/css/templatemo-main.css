@@ -167,7 +167,7 @@ position: absolute;
 	background-size:cover;
 }
 .baner-content {
- /* padding-top: 30vh;*/
+  padding-top: 40vh;
   text-align: center;
   background-image: url(../img/back4.jpg);
 	min-height:100vh;
@@ -511,6 +511,10 @@ footer em {
 }
 
 @media (max-width: 767px){
+	
+	.the-heart-welcome-content{
+	margin-top:0px;
+}
   .time-content {
   padding-top: 0vh;
   text-align: center;
@@ -525,7 +529,7 @@ footer em {
   padding-top: 0vh;
 	}
   .baner-content {
-  /*  padding-top: 30vh;*/
+    padding-top: 1vh;
   }
 .panel-date{
 	margin-left: 40px;
@@ -820,7 +824,7 @@ body.lb-disable-scrolling {
     -ms-transform: rotate(-10deg);
     -webkit-transform: rotate(-10deg);
     transform: rotate(-10deg);
-    padding-top: 140px;
+  
     margin-bottom: 10px;
 }
 
