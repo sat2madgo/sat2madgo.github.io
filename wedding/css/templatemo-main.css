@@ -284,6 +284,11 @@ h4, .h4 {
   margin: 15px;
 }
 
+.projects-content .testimonials-item{
+	    background-color: white;
+    padding: 5px;
+    padding-bottom: 0px;
+}
 .projects-content .item .text-content {
   background-color: #fff;
   text-align: center;
@@ -291,9 +296,10 @@ h4, .h4 {
 }
 
 .projects-content .item .text-content h4 {
-  margin-top: 0px;
-  font-size: 19px;
-  font-weight: 600;
+      margin: 0px;
+    font-size: 19px;
+    font-weight: 600;
+    font-family: 'Pacifico', cursive;
 }
 
 .projects-content .item .text-content span {
