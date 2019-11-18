@@ -15,7 +15,10 @@ section {
   padding: 25px 0 35px;
   background: #fff;
 }
-
+.row {
+ 
+    margin: auto !important;
+}
 body { 
   position: relative; /* we need this for the scrollspy */ 
   font-size: 14px;
