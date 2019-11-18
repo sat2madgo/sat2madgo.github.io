@@ -23,7 +23,7 @@ body {
   position: relative; /* we need this for the scrollspy */ 
   font-size: 14px;
 }
-
+.mob{display:none;}
 a { color: #3CC; }
 
 a:hover { color: #FF0; }
@@ -543,6 +543,10 @@ footer em {
 	.the-heart-welcome-content{
 	margin-top:0px !important;
 }
+	
+.mob{display:block;}
+	
+.desk{display:none;}
   .time-content {
   padding-top: 0vh;
   text-align: center;
