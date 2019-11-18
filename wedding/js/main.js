@@ -14,13 +14,13 @@ heartAnimation();
     var top_header = $('.parallax-content');
     top_header.css({'background-position':'center center'}); // better use CSS
 function scrollHandler(){
-	   var st = $(this).scrollTop();
+	   var st = $(window).scrollTop();
 	    
 	 top_header.each(function(){
-		 if((this.offsetTop+this.clientHeight)<st && (st-this.offsetTop)>=0)
-		 {
+		/* if((st-this.offsetTop)<(this.clientHeight+10) && (st-this.offsetTop)>-10)
+		 {*/
 	   $(this).css({'background-position':'center calc(50% + '+((st-this.offsetTop)*.5)+'px)'});
-		 }
+		/* }*/
     });
 }
     $(window).scroll(function () {
