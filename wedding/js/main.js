@@ -13,12 +13,22 @@ countDown();
 heartAnimation();
     var top_header = $('.parallax-content');
     top_header.css({'background-position':'center center'}); // better use CSS
-
-    $(window).scroll(function () {
-    var st = $(this).scrollTop();
-    top_header.each(function(){
+function scrollHandler(){
+	   var st = $(this).scrollTop();
+	    
+	 top_header.each(function(){
+		 if((this.offsetTop+this.clientHeight)<st && (st-this.offsetTop)>=0)
+		 {
 	   $(this).css({'background-position':'center calc(50% + '+((st-this.offsetTop)*.5)+'px)'});
+		 }
     });
+}
+    $(window).scroll(function () {
+	    
+    
+	       window.requestAnimationFrame(scrollHandler);
+
+   
     });
 
 
@@ -61,6 +71,8 @@ heartAnimation();
 
 
 });
+
+
 function countDown(){
 	const second = 1000,
       minute = second * 60,
