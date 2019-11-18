@@ -143,6 +143,7 @@ position: absolute;
   width: 100%;
   min-height: 100vh;
   background-size: cover;
+	    transition: all 0.1s;
 }
 
 .invi-content {
@@ -167,7 +168,7 @@ position: absolute;
 	background-size:cover;
 }
 .baner-content {
-  padding-top: 30vh;
+  padding-top: 20vh;
   text-align: center;
   background-image: url(../img/home.jpg);
 	min-height:100vh;
@@ -529,7 +530,7 @@ footer em {
   padding-top: 0vh;
 	}
   .baner-content {
-    padding-top: 1vh;
+    padding-top: 30vh;
   }
 .panel-date{
 	margin-left: 40px;
