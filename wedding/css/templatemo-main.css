@@ -174,7 +174,7 @@ position: absolute;
 .baner-content {
   padding-top: 20vh;
   text-align: center;
- /* background-image: url(../img/home.jpg);*/
+  background-image: url(../img/home.jpg);
 	min-height:100vh;
 }
 .baner-content h1 {
