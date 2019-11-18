@@ -143,7 +143,7 @@ position: absolute;
   width: 100%;
   min-height: 100vh;
   background-size: cover;
-	       background-attachment: fixed;
+	       transform: translateZ(0);
 }
 
 .invi-content {
