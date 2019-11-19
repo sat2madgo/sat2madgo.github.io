@@ -154,7 +154,7 @@ position: absolute;
     z-index: 0;
 	min-height:100vh;
 }
-.jarallax > .jarallax-img {
+ .jarallax-img {
     position: absolute;
     object-fit: cover;
     /* support for plugin https://github.com/bfred-it/object-fit-images */
@@ -164,6 +164,7 @@ position: absolute;
     width: 100%;
     height: 100%;
     z-index: -1;
+	     transition: all 0.1s cubic-bezier(0, 0, 1, 1) 0s;
 }
 
 .invi-content {
