@@ -257,8 +257,13 @@ Maharashtra 400028</br></div>
         </div>
     </div>
   <div class="time-content jarallax" id="time-us">
-	    <img class="jarallax-img desk" src="img/selfie.jpg" alt="">
-	   <img class="jarallax-img mob" src="img/potrait.jpg" alt="">
+	  
+	  <picture class="jarallax-img">
+  <source srcset="img/selfie.jpg" media="(min-width: 767px)"/>
+  <source srcset="img/potrait.jpg" media="(min-width: 100px)"/>
+  <img src="img/potrait.jpg" alt="example"/>
+</picture>
+	 
         <div class="container">
             <div class="row">
 		     <div class="animation fadeInUp animated" style="visibility: visible;">
