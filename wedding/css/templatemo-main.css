@@ -154,10 +154,12 @@ position: absolute;
     z-index: 0;
 	min-height:100vh;
 }
- .jarallax-img {
-   
-	   transition: all 0.1s ease;
+.jrlx{
+    height: 100%;
+    object-position: 75% 50%;
+    object-fit: cover;
 }
+
 
 .invi-content {
   padding-top: 20vh;
@@ -535,6 +537,10 @@ footer em {
 	
 	.the-heart-welcome-content{
 	margin-top:0px !important;
+}
+	 .jarallax-img {
+   
+	   transition: all 0.1s ease;
 }
 	
 .mob{display:block;}
