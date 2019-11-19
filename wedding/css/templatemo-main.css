@@ -538,6 +538,9 @@ footer em {
 	.the-heart-welcome-content{
 	margin-top:0px !important;
 }
+	.countdown ul{
+	padding:0;
+	}
 	 .jarallax-img {
    
 	   transition: all 0.1s ease;
