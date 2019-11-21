@@ -1242,6 +1242,7 @@ body.lb-disable-scrolling {
 	-webkit-transition:all ease 0.5s;
 	-o-transition:all ease 0.5s;
 	transition:all ease 0.5s;
+	text-decoration:none;
 }
 .panel-number{
 	background: none repeat scroll 0 0 #fff;
