@@ -78,7 +78,8 @@ function scrollHandler(){
     var owl = $("#owl-testimonials");
 
       owl.owlCarousel({
-        
+         loop:true,
+	       stagePadding: 50,
         pagination : true,
         paginationNumbers: false,
         autoPlay: 6000, //Set AutoPlay to 3 seconds
