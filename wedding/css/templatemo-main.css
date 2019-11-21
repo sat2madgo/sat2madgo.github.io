@@ -24,9 +24,9 @@ body {
   font-size: 14px;
 }
 .mob{display:none;}
-a { color: #3CC; }
+a { color: #f1700a; }
 
-a:hover { color: #FF0; }
+a:hover { color: #f0395f; }
 .thanks{
 position: absolute;
     bottom: 10vw;
