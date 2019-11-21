@@ -141,6 +141,51 @@ position: absolute;
   letter-spacing: 0.5px;
 }
 
+.mapButtons button{
+	border-radius: 36px;
+    height: 36px;
+    cursor: inherit;
+    margin: 6px;
+    padding: 0px;
+    background: #1A73E8;
+    outline: 0;
+    border: solid 1px #1A73E8;
+    width: 36px;
+}
+
+.mapButtons .btn div{
+	
+	color: #1A73E8;
+    letter-spacing: 0.025em;
+    font-family: Roboto,'Noto Sans Devanagari UI', 'Noto Sans Bengali UI', 'Noto Sans Telugu UI', 'Noto Sans Tamil UI', 'Noto Sans Gujarati UI', 'Noto Sans Kannada UI', 'Noto Sans Malayalam UI', 'Noto Sans Gurmukhi UI', Arial,sans-serif;
+
+    font-weight: 400;
+    line-height: 1rem;
+}
+.mapButtons{
+
+    box-shadow: none;
+    background-color: rgba(255,255,255,1);
+    border-radius: 40px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    display: block;
+    position: absolute;
+    bottom: 40px;
+    overflow: hidden;
+    padding: 0 12px;
+    display: inline-block;
+    text-align: center;
+    left: 50%;
+  
+    transform: translate(-50%, -50%);
+ 
+}
+.seperator{
+	
+    border-right: 1px solid #d4d4d4;
+    height: 100%;
+    margin-left: 2px;
+	position: absolute;}
 
 .parallax-content {
   width: 100%;
@@ -536,6 +581,15 @@ footer em {
 
 @media (max-width: 767px){
 	
+	.mapButtons button{
+		    border-radius: 32px;
+    height: 32px;
+    width: 32px;
+	}
+	.btn {
+    padding: 3px 6px;
+    font-size: 12px;
+}
 	.the-heart-welcome-content{
 	margin-top:0px !important;
 }
@@ -574,7 +628,10 @@ footer em {
   .baner-content h1 {
     font-size: 64px;
   }
-
+.contact-content {
+  padding-left: 0px;
+  padding-right: 0px;
+	}
   .baner-content em {
   }
 
@@ -1225,48 +1282,3 @@ body.lb-disable-scrolling {
     font-size: 35px;
 }
 
-.mapButtons button{
-	border-radius: 36px;
-    height: 36px;
-    cursor: inherit;
-    margin: 6px;
-    padding: 0px;
-    background: #1A73E8;
-    outline: 0;
-    border: solid 1px #1A73E8;
-    width: 36px;
-}
-
-.mapButtons .btn div{
-	
-	color: #1A73E8;
-    letter-spacing: 0.025em;
-    font-family: Roboto,'Noto Sans Devanagari UI', 'Noto Sans Bengali UI', 'Noto Sans Telugu UI', 'Noto Sans Tamil UI', 'Noto Sans Gujarati UI', 'Noto Sans Kannada UI', 'Noto Sans Malayalam UI', 'Noto Sans Gurmukhi UI', Arial,sans-serif;
-
-    font-weight: 400;
-    line-height: 1rem;
-}
-.mapButtons{
-
-    box-shadow: none;
-    background-color: rgba(255,255,255,1);
-    border-radius: 40px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-    display: block;
-    position: absolute;
-    bottom: 40px;
-    overflow: hidden;
-    padding: 0 12px;
-    display: inline-block;
-    text-align: center;
-    left: 50%;
-  
-    transform: translate(-50%, -50%);
- 
-}
-.seperator{
-	
-    border-right: 1px solid #d4d4d4;
-    height: 100%;
-    margin-left: 2px;
-	position: absolute;}
