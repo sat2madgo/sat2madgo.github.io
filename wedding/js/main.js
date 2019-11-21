@@ -33,7 +33,7 @@ function scrollHandler(){
 
 
     $('body').scrollspy({ 
-        target: '.fixed-side-navbar',
+        target: '.fixed-side-navbar,.panel-body',
         offset: 200
     });
       
