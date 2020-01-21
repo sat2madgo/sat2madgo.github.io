@@ -2,8 +2,8 @@
 function Obstacle(m) {
   this.mass = m;
   
-  this.position = createVector(windowWidth-this.mass*12, windowHeight-this.mass*8);
-  this.velocity = createVector(random(1-9), 0);
+  this.position = createVector(videoSize-this.mass*6, videoSize-this.mass*12);
+  this.velocity = createVector(-random(3,9), 0);
   this.acceleration = createVector(0, 0);
 }
 
@@ -28,7 +28,7 @@ Obstacle.prototype.display = function() {
   stroke(0);
   strokeWeight(2);
   fill(255,127);
-  rect(this.position.x, this.position.y, this.mass*12, this.mass*8);
+  rect(this.position.x, this.position.y, this.mass*6, this.mass*12);
 };
 
 // Bounce off bottom of window

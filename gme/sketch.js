@@ -1,62 +1,99 @@
+// The brain
+let pixelBrain;
+
+
+var videoSize=500;
 var man,obs;
 var kc=0;
+var obs=[];
+var isTouched=false;
+var canv;
 function setup() {
-  createCanvas(windowWidth,windowHeight);
+  canv=createCanvas(videoSize,videoSize);
   background(51);
+   frameRate(30);
  // noStroke();
  // noLoop();
+  
+
+  // Inputs are total pixels times 3 (RGB)
+  let totalPixels = videoSize * videoSize * 4;
+  const options = {
+    inputs: 5,
+    outputs: 1,
+    learningRate: 0.01,
+    task:'regression',
+    debug: true,
+  }
+  // Create the model
+  pixelBrain = ml5.neuralNetwork(options);
+  
     man=new Mover(40, 40, 0);
-  obs= new Obstacle(random(3, 10));
+addObstacle();
   
 }
 
+
+function addObstacle(){
+  obs.push(new Obstacle(random(6, 10)));
+  setTimeout(addObstacle,random(1000,4000));
+}
 function draw() {
  background(127);
-// Gravity is scaled by mass here!
+ 
+ 
+
+// Gravity is scaled by mass he
    // let gravity2 = createVector( -0.1* obs.mass,0);
 	// Apply gravity
    // obs.applyForce(gravity2);
     // Update and display
-    obs.update();
-    obs.display();
-    if(!obs.checkEdges()){
-	obs= new Obstacle(random(3, 10));
+	obs=obs.filter(function(e,i){
+	 e.update();
+    e.display();
+    if(e.checkEdges()){
+	return e;
 	}
+	if((man.position.x+16)>=e.position.x & (man.position.y+16)>=e.position.y ){
+	document.getElementById("ded").innerText=kc++;
+	}else{
+	return e;
+	}
+	});
+   
     
  // Gravity is scaled by mass here!
-    let gravity = createVector(0, 0.1* man.mass);
+    let gravity = createVector(0, 0.3* man.mass);
 	// Apply gravity
     man.applyForce(gravity);
     // Update and display
     man.update();
     man.display();
-    man.checkEdges();
-	if((man.position.x+16)>=obs.position.x & (man.position.y+16)>=obs.position.y ){
-	console.log("Killed");
-	obs= new Obstacle(random(3, 10));
-	document.getElementById("ded").innerText=kc++;
-	}
+    isTouched=man.checkEdges();
+
 }
 function touchStarted() {
-  var gravity = createVector(0, -3* man.mass);
+if(isTouched){
+  var gravity = createVector(0, -10* man.mass);
 	// Apply gravity
     man.applyForce(gravity);
 	// Update and display
     man.update();
     man.display();
-    man.checkEdges();
+    isTouched=man.checkEdges();
+	}
   // prevent default
   return false;
 }
 function keyPressed() {
   let keyIndex = -1;
- if(key==" "){
- var gravity = createVector(0, -3* man.mass);
+ if(key==" "&isTouched){
+ var gravity = createVector(0, -10* man.mass);
 	// Apply gravity
     man.applyForce(gravity);
 	// Update and display
     man.update();
     man.display();
-    man.checkEdges();
+    isTouched=man.checkEdges();
  }
   }

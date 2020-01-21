@@ -33,8 +33,10 @@ Mover.prototype.display = function() {
 Mover.prototype.checkEdges = function() {
   if (this.position.y > (height - 16)) {
     // A little dampening when hitting the bottom
-    this.velocity.y *= -0.4;
+    this.velocity.y =0;
     this.position.y = (height - 16);
+  return true;
   }
+  return false;
 };
 
