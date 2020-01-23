@@ -18,25 +18,25 @@ function modelLoaded() {
 }
 
 // Create a new classifier using those features and with a video element
-const classifier = featureExtractor.classification(canv, cavasReady);
+//const classifier = featureExtractor.classification(canv, cavasReady);
 
 // Create a KNN classifier
 const knnClassifier = ml5.KNNClassifier();
 
 // Create a featureExtractor that can extract features of an image
 const fx = ml5.featureExtractor('MobileNet', cavasReady);
-const classifierX = ml5.imageClassifier('MobileNet');
+//const classifierX = ml5.imageClassifier('MobileNet');
 // Triggers when the video is ready
 function cavasReady() {
   console.log('The cavas is ready!');
-  featurez = fx.infer(canvas);
-  var intv=setInterval(tryAct,1500);
+  featurez = fx.infer(canv.canvas);
+  var intv=setInterval(tryAct,1100);
 }
-
+	
 function setup() {
   canv=createCanvas(xSize,ySize);
   background(51);
-   frameRate(15);
+   frameRate(21);
  // noStroke();
  // noLoop();
   
@@ -107,7 +107,7 @@ function tryAct(){
 	else
 	knnClassifier.addExample(featurez, "Jump");
 	}
-featurez = fx.infer(canvas);
+featurez = fx.infer(canv.canvas);
 
 knnClassifier.classify(featurez, (err, result) => {
   console.log(result); // result.label is the predicted label
@@ -145,7 +145,7 @@ classifier.classify(canv, (err, result) => {
 classifierX.predict(canvas, (err, result) => {
   console.log(result); // result.label is the predicted label
 });*/
-const features = fx.infer(canvas);
+const features = fx.infer(canv.canvas);
 // Use KNN Classifier to classify these features
 knnClassifier.classify(features, (err, result) => {
   console.log(result); // result.label is the predicted label
@@ -163,7 +163,7 @@ knnClassifier.classify(features, (err, result) => {
 }
 function keyPressed() {
   let keyIndex = -1;
-  var featuresx = fx.infer(canvas);
+ // var featuresx = fx.infer(canvas);
   if(key=="j"){
   // Add a new image with a label
 //classifier.addImage(convertCanvasToImage(canv.canvas), 'Jump');
