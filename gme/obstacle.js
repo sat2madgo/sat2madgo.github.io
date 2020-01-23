@@ -2,8 +2,9 @@
 function Obstacle(m) {
   this.mass = m;
   
-  this.position = createVector(videoSize-this.mass*6, videoSize-this.mass*12);
-  this.velocity = createVector(-random(3,9), 0);
+  this.position = createVector(xSize-this.mass*6, ySize-this.mass*12);
+  //this.velocity = createVector(-random(3,9), 0);
+  this.velocity = createVector(-5, 0);
   this.acceleration = createVector(0, 0);
 }
 
