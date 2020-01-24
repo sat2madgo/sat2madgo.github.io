@@ -8,7 +8,7 @@ var obs=[];
 var isTouched=false;
 var canv;
 var alive=true;
-var featurez,desc="dont";
+var featurez,fex,desc="dont";
 // Extract the already learned features from MobileNet
 const featureExtractor = ml5.featureExtractor('MobileNet', modelLoaded);
 
@@ -36,7 +36,7 @@ function cavasReady() {
 function setup() {
   canv=createCanvas(xSize,ySize);
   background(51);
-   frameRate(21);
+   frameRate(25);
  // noStroke();
  // noLoop();
   
@@ -55,8 +55,8 @@ function convertCanvasToImage(canvas) {
 }
 
 function addObstacle(){
-  obs.push(new Obstacle(random(6, 10)));
-  setTimeout(addObstacle,random(5000,9000));
+  obs.push(new Obstacle(random(6, 7)));
+  setTimeout(addObstacle,random(9000,11000));
 }
 function draw() {
  background(127);
@@ -86,7 +86,7 @@ function draw() {
    
     
  // Gravity is scaled by mass here!
-    let gravity = createVector(0, 0.3* man.mass);
+    let gravity = createVector(0, 0.9* man.mass);
 	// Apply gravity
     man.applyForce(gravity);
     // Update and display
@@ -98,15 +98,19 @@ function draw() {
 
 
 function tryAct(){
+	if(isTouched){
 	if(alive){
 	knnClassifier.addExample(featurez, desc);
+	
 	}
 	else{
-		if(desc=="Jump")
-	knnClassifier.addExample(featurez, "dont");
-	else
-	knnClassifier.addExample(featurez, "Jump");
+		if(desc=="Jump"){
+		knnClassifier.addExample(fex, "Jump");
+		}
+	else{
+	knnClassifier.addExample(featurez, "Jump");}
 	}
+	fex=featurez;
 featurez = fx.infer(canv.canvas);
 
 knnClassifier.classify(featurez, (err, result) => {
@@ -114,7 +118,7 @@ knnClassifier.classify(featurez, (err, result) => {
   alive=true;
   if(result.label=="Jump"){
 	  if(isTouched){
- var gravity = createVector(0, -10* man.mass);
+ var gravity = createVector(0, -15* man.mass);
 	// Apply gravity
     man.applyForce(gravity);
 	// Update and display
@@ -129,7 +133,7 @@ knnClassifier.classify(featurez, (err, result) => {
   }
   
 });
-
+	}
 }
 
 function touchStarted() {
@@ -150,7 +154,7 @@ const features = fx.infer(canv.canvas);
 knnClassifier.classify(features, (err, result) => {
   console.log(result); // result.label is the predicted label
 });
-  var gravity = createVector(0, -10* man.mass);
+  var gravity = createVector(0, -15* man.mass);
 	// Apply gravity
     man.applyForce(gravity);
 	// Update and display
