@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Family Profile — Shreyas Tigdi</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+/* ══════════════════════════════════════════
+   RESET
+══════════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ══════════════════════════════════════════
+   SCREEN: page chrome
+══════════════════════════════════════════ */
+html, body {
+  min-height: 100%;
+  background: #c8bdb0;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* sticky editor bar */
+.editor-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #140700;
+  border-bottom: 2px solid #c8781a;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.editor-bar label {
+  color: #d4a06a;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+#rentInput {
+  background: #2a1205;
+  border: 1.5px solid #c8781a;
+  border-radius: 6px;
+  color: #f5ede0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 5px 12px;
+  width: 150px;
+  outline: none;
+}
+#rentInput:focus { border-color: #e8a84a; }
+.hint {
+  color: #7a5a3a;
+  font-size: 11px;
+}
+.print-tip {
+  margin-left: auto;
+  background: rgba(200,120,26,0.15);
+  border: 1px solid rgba(200,120,26,0.4);
+  border-radius: 6px;
+  padding: 7px 16px;
+  color: #e8a84a;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+/* sheet wrapper — scrollable on small screens */
+.page-wrap {
+  padding: 32px 24px 48px;
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+}
+
+/* ══════════════════════════════════════════
+   THE A4 SHEET
+   Design in mm. 1mm = 3.7795px at 96dpi.
+   A4 = 210mm × 297mm
+   We render at 1x in mm so print is pixel-perfect.
+   For screen preview we scale via transform.
+══════════════════════════════════════════ */
+.sheet {
+  /* True A4 in mm */
+  width: 210mm;
+  height: 297mm;
+  position: relative;
+  overflow: hidden;
+  background: #f9f3eb;
+  flex-shrink: 0;
+
+  /* Screen shadow */
+  box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+
+  font-family: 'DM Sans', sans-serif;
+  font-size: 2.8mm;   /* base font ~10.5px equivalent */
+  line-height: 1.4;
+}
+
+/* ── blobs ── */
+.blob { position: absolute; border-radius: 50%; pointer-events: none; }
+.blob-tl {
+  top: -20mm; left: -20mm; width: 80mm; height: 80mm;
+  background: radial-gradient(circle at 35% 35%, #b8621a, #7a3e0e 55%, transparent 75%);
+  opacity: 0.10;
+}
+.blob-br {
+  bottom: -22mm; right: -22mm; width: 95mm; height: 95mm;
+  background: radial-gradient(circle at 65% 65%, #c8882a, #7a3e0e 55%, transparent 75%);
+  opacity: 0.08;
+}
+
+/* ══════════════════════════════════════════
+   LAYOUT ZONES  (all in mm from top/left)
+   Header:       0 → 29mm
+   Gold bar:     29mm → 30mm
+   Members band: 30mm → 60mm
+   Separator:    60mm → 61mm  (1px line)
+   Body cols:    61mm → 288mm
+   Footer:       288mm → 297mm
+══════════════════════════════════════════ */
+
+/* HEADER */
+.hdr {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 29mm;
+  background: linear-gradient(135deg, #1a0900 0%, #3d1a07 50%, #1a0900 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 11mm;
+  overflow: hidden;
+}
+.hdr::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    52deg, transparent, transparent 7mm,
+    rgba(255,255,255,0.016) 7mm, rgba(255,255,255,0.016) 14mm
+  );
+}
+.hdr-left { position: relative; z-index: 1; }
+.hdr-eye {
+  font-size: 2.1mm;
+  letter-spacing: 0.8mm;
+  text-transform: uppercase;
+  color: #c9824a;
+  font-weight: 600;
+  margin-bottom: 1.5mm;
+}
+.hdr h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 9.5mm;
+  font-weight: 900;
+  color: #f5ede0;
+  line-height: 1;
+  letter-spacing: -0.2mm;
+}
+.hdr h1 em { color: #e8924a; font-style: normal; }
+.hdr-right { position: relative; z-index: 1; text-align: right; }
+.hdr-big {
+  font-family: 'Playfair Display', serif;
+  font-size: 19mm;
+  font-weight: 900;
+  line-height: 1;
+  color: rgba(232,146,74,0.14);
+  letter-spacing: -1mm;
+}
+.hdr-lbl {
+  font-size: 2.1mm;
+  letter-spacing: 0.8mm;
+  text-transform: uppercase;
+  color: #c9824a;
+  font-weight: 600;
+  margin-top: -1mm;
+}
+
+/* GOLD BAR */
+.goldbar {
+  position: absolute;
+  top: 29mm; left: 0; right: 0;
+  height: 0.8mm;
+  background: linear-gradient(90deg, #5a2a08, #e8924a 35%, #c8781a 65%, #5a2a08);
+}
+
+/* MEMBERS BAND */
+.members-band {
+  position: absolute;
+  top: 29.8mm; left: 0; right: 0;
+  height: 30mm;
+  padding: 3.5mm 11mm 3mm;
+  background: linear-gradient(180deg, rgba(180,100,30,0.06) 0%, transparent 100%);
+  border-bottom: 0.3mm solid rgba(180,120,50,0.18);
+}
+
+/* DIVIDER (vertical) */
+.divider {
+  position: absolute;
+  top: 60mm; bottom: 9mm;
+  left: 105mm;
+  width: 0.25mm;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(180,120,50,0.32) 6%,
+    rgba(180,120,50,0.32) 94%,
+    transparent 100%
+  );
+}
+
+/* COLUMNS */
+.col-l {
+  position: absolute;
+  top: 60mm; left: 0;
+  width: 105mm; bottom: 9mm;
+  padding: 5mm 5mm 5mm 11mm;
+}
+.col-r {
+  position: absolute;
+  top: 60mm; left: 105mm;
+  width: 105mm; bottom: 9mm;
+  padding: 5mm 11mm 5mm 5mm;
+}
+
+/* FOOTER */
+.ftr {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 9mm;
+  background: linear-gradient(135deg, #1a0900, #2e1507);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 11mm;
+}
+.ftr-txt {
+  font-size: 1.9mm;
+  color: rgba(200,160,100,0.5);
+  letter-spacing: 0.5mm;
+  text-transform: uppercase;
+}
+.ftr-dots { display: flex; gap: 1.4mm; align-items: center; }
+.ftr-dot { width: 1.3mm; height: 1.3mm; border-radius: 50%; background: rgba(200,120,40,0.35); }
+.ftr-dot:nth-child(2) { width: 1.8mm; height: 1.8mm; background: rgba(200,120,40,0.65); }
+
+/* ══════════════════════════════════════════
+   COMPONENTS
+══════════════════════════════════════════ */
+
+/* section label */
+.slbl {
+  font-size: 1.9mm;
+  letter-spacing: 0.65mm;
+  text-transform: uppercase;
+  color: #c8781a;
+  font-weight: 600;
+  margin-bottom: 2.5mm;
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+}
+.slbl::after {
+  content: '';
+  flex: 1;
+  height: 0.25mm;
+  background: linear-gradient(90deg, rgba(200,120,26,0.4), transparent);
+}
+
+/* members row */
+.members { display: flex; gap: 2.5mm; }
+.member {
+  flex: 1;
+  text-align: center;
+  background: linear-gradient(160deg, #fffaf4, #fdf0e0);
+  border: 0.3mm solid rgba(200,140,70,0.25);
+  border-radius: 2.5mm;
+  padding: 2.5mm 1.5mm 2mm;
+  position: relative;
+  overflow: hidden;
+}
+.member::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 0.6mm;
+  background: linear-gradient(90deg, #c8781a, #e8a84a);
+}
+.mem-em  { font-size: 5.5mm; display: block; margin-bottom: 1.2mm; }
+.mem-nm  { font-family: 'Playfair Display', serif; font-size: 2.6mm; font-weight: 700; color: #1a0900; line-height: 1.2; }
+.mem-age { font-size: 2.1mm; color: #8a5a2a; margin-top: 0.5mm; }
+.mem-rol { font-size: 2mm; color: #b07030; margin-top: 0.4mm; font-weight: 500; }
+
+/* info grid */
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5mm 3.5mm; }
+.i-lbl { font-size: 1.8mm; letter-spacing: 0.5mm; text-transform: uppercase; color: #b07030; font-weight: 600; margin-bottom: 0.6mm; }
+.i-val { font-family: 'Playfair Display', serif; font-size: 3.2mm; font-weight: 700; color: #1a0900; line-height: 1.25; }
+.i-sub { font-size: 2.1mm; color: #7a4a1a; margin-top: 0.4mm; line-height: 1.35; }
+
+/* budget card */
+.budget-card {
+  background: linear-gradient(135deg, #1a0900, #3d1a07);
+  border-radius: 2.5mm;
+  padding: 3.5mm 4.5mm;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  position: relative;
+}
+.budget-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    50deg, transparent, transparent 4mm,
+    rgba(255,255,255,0.02) 4mm, rgba(255,255,255,0.02) 8mm
+  );
+}
+.bc-inner { position: relative; z-index: 1; }
+.bc-lbl { font-size: 2mm; letter-spacing: 0.5mm; text-transform: uppercase; color: #c9824a; font-weight: 600; margin-bottom: 0.8mm; }
+.bc-amt { font-family: 'Playfair Display', serif; font-size: 8mm; font-weight: 900; color: #f5ede0; line-height: 1; }
+.bc-sub { font-size: 2.1mm; color: #a07850; margin-top: 0.8mm; }
+.bc-icon { font-size: 11mm; opacity: 0.1; position: relative; z-index: 1; }
+
+/* tags */
+.tags { display: flex; flex-wrap: wrap; gap: 1.5mm; }
+.tag {
+  border: 0.3mm solid rgba(200,120,40,0.32);
+  border-radius: 5mm;
+  padding: 0.8mm 2.5mm;
+  font-size: 2mm;
+  color: #5a3010;
+  font-weight: 500;
+  background: rgba(200,120,40,0.07);
+}
+.tag.hi {
+  background: linear-gradient(135deg, #c8781a, #e8a84a);
+  border-color: transparent;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* employment cards */
+.emp-card {
+  background: linear-gradient(150deg, #fffaf4, #fdf0e0);
+  border: 0.3mm solid rgba(200,140,70,0.25);
+  border-radius: 2mm;
+  padding: 2.5mm 3.5mm;
+  display: flex;
+  align-items: center;
+  gap: 3mm;
+}
+.emp-dot { width: 2.2mm; height: 2.2mm; border-radius: 50%; flex-shrink: 0; background: linear-gradient(135deg, #c8781a, #e8a84a); }
+.emp-who { font-size: 1.9mm; letter-spacing: 0.4mm; text-transform: uppercase; color: #b07030; font-weight: 600; margin-bottom: 0.5mm; }
+.emp-co  { font-family: 'Playfair Display', serif; font-size: 3.2mm; font-weight: 700; color: #1a0900; line-height: 1.2; }
+.emp-loc { font-size: 2.1mm; color: #7a4a1a; margin-top: 0.5mm; }
+
+/* note */
+.note-box {
+  background: linear-gradient(150deg, #fffaf4, #fdf0e0);
+  border: 0.3mm solid rgba(200,140,70,0.28);
+  border-radius: 2.5mm;
+  padding: 3.5mm 4mm;
+  position: relative;
+  overflow: hidden;
+}
+.note-box::before {
+  content: '\201C';
+  position: absolute;
+  top: -3mm; left: 2.5mm;
+  font-family: 'Playfair Display', serif;
+  font-size: 26mm;
+  color: rgba(200,120,40,0.07);
+  line-height: 1;
+  pointer-events: none;
+}
+.note-greet {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.2mm;
+  font-weight: 700;
+  color: #8b4e1a;
+  margin-bottom: 2mm;
+  position: relative;
+}
+.note-box p {
+  font-size: 2.4mm;
+  line-height: 1.72;
+  color: #3a1e08;
+  margin-bottom: 1.5mm;
+  position: relative;
+}
+.note-box p:last-child { margin-bottom: 0; }
+
+/* vertical gaps between sections */
+.gap { height: 4mm; }
+.gap-sm { height: 3mm; }
+
+/* ══════════════════════════════════════════
+   PRINT  — hide chrome, ensure exact fit
+══════════════════════════════════════════ */
+@media print {
+  @page {
+    size: 210mm 297mm;
+    margin: 0;
+  }
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #f9f3eb !important;
+    width: 210mm;
+    height: 297mm;
+  }
+  .editor-bar { display: none !important; }
+  .page-wrap {
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+  }
+  .sheet {
+    box-shadow: none !important;
+    width: 210mm !important;
+    height: 297mm !important;
+    page-break-after: avoid;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ── EDITOR BAR ── -->
+<div class="editor-bar">
+  <label for="rentInput">Monthly Rent</label>
+  <input type="number" id="rentInput" value="65000" min="1000" step="1000">
+  <span class="hint">Type any amount — profile updates instantly</span>
+  <div class="print-tip">Press <strong>Ctrl+P</strong> (or ⌘P on Mac) to print / save as PDF</div>
+</div>
+
+<!-- ── PAGE WRAP ── -->
+<div class="page-wrap">
+<div class="sheet">
+
+  <div class="blob blob-tl"></div>
+  <div class="blob blob-br"></div>
+
+  <!-- HEADER -->
+  <div class="hdr">
+    <div class="hdr-left">
+      <div class="hdr-eye">Tenant Profile · Mumbai, Maharashtra</div>
+      <h1>Our <em>Family</em> Profile</h1>
+    </div>
+    <div class="hdr-right">
+      <div class="hdr-big">5</div>
+      <div class="hdr-lbl">Members</div>
+    </div>
+  </div>
+
+  <div class="goldbar"></div>
+
+  <!-- MEMBERS BAND -->
+  <div class="members-band">
+    <div class="slbl">Family Members</div>
+    <div class="members">
+      <div class="member">
+        <span class="mem-em">👴</span>
+        <div class="mem-nm">Father</div>
+        <div class="mem-age">~65 yrs</div>
+        <div class="mem-rol">Senior</div>
+      </div>
+      <div class="member">
+        <span class="mem-em">👵</span>
+        <div class="mem-nm">Mother</div>
+        <div class="mem-age">~65 yrs</div>
+        <div class="mem-rol">Senior</div>
+      </div>
+      <div class="member">
+        <span class="mem-em">👨</span>
+        <div class="mem-nm">Shreyas Tigdi</div>
+        <div class="mem-age">~34 yrs</div>
+        <div class="mem-rol">Working Professional</div>
+      </div>
+      <div class="member">
+        <span class="mem-em">👩</span>
+        <div class="mem-nm">Wife</div>
+        <div class="mem-age">~34 yrs</div>
+        <div class="mem-rol">Working Professional</div>
+      </div>
+      <div class="member">
+        <span class="mem-em">👶</span>
+        <div class="mem-nm">Son</div>
+        <div class="mem-age">3 yrs</div>
+        <div class="mem-rol">Sane Guruji Vidyalaya</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- LEFT COLUMN -->
+  <div class="col-l">
+
+    <div class="slbl">Background &amp; Community</div>
+    <div class="info-grid">
+      <div>
+        <div class="i-lbl">Community</div>
+        <div class="i-val">Maharashtrian, Koli</div>
+      </div>
+      <div>
+        <div class="i-lbl">Native Village</div>
+        <div class="i-val">Worli Village, Mumbai</div>
+      </div>
+      <div>
+        <div class="i-lbl">Current Residence</div>
+        <div class="i-val">Dadar, Mumbai</div>
+        <div class="i-sub">Two houses owned in Dadar</div>
+      </div>
+      <div>
+        <div class="i-lbl">Reason for Moving</div>
+        <div class="i-val">Need a bigger home</div>
+        <div class="i-sub">Growing family &amp; elderly parents</div>
+      </div>
+    </div>
+
+    <div class="gap"></div>
+
+    <div class="slbl">Monthly Budget</div>
+    <div class="budget-card">
+      <div class="bc-inner">
+        <div class="bc-lbl">Rent Budget</div>
+        <div class="bc-amt" id="rentDisplay">₹65,000</div>
+        <div class="bc-sub">Per month · Long-term stay preferred</div>
+      </div>
+      <div class="bc-icon">🏠</div>
+    </div>
+
+    <div class="gap"></div>
+
+    <div class="slbl">Why We Are Good Tenants</div>
+    <div class="tags">
+      <span class="tag hi">Dual MNC Income</span>
+      <span class="tag hi">Property Owners in Dadar</span>
+      <span class="tag">Non-smoking family</span>
+      <span class="tag">No pets</span>
+      <span class="tag">Non-vegetarian</span>
+      <span class="tag">Quiet family unit</span>
+      <span class="tag">Docs &amp; verification ready</span>
+      <span class="tag">Long-term stay</span>
+    </div>
+
+  </div>
+
+  <!-- RIGHT COLUMN -->
+  <div class="col-r">
+
+    <div class="slbl">Professional Profile</div>
+    <div class="emp-card">
+      <div class="emp-dot"></div>
+      <div>
+        <div class="emp-who">Shreyas Tigdi</div>
+        <div class="emp-co">Accenture plc</div>
+        <div class="emp-loc">Vikhroli, Mumbai · Salaried</div>
+      </div>
+    </div>
+    <div class="gap-sm"></div>
+    <div class="emp-card">
+      <div class="emp-dot"></div>
+      <div>
+        <div class="emp-who">Wife</div>
+        <div class="emp-co">Mitsubishi UFJ Financial Group</div>
+        <div class="emp-loc">Vikhroli, Mumbai · Salaried</div>
+      </div>
+    </div>
+
+    <div class="gap"></div>
+
+    <div class="slbl">A Note to You</div>
+    <div class="note-box">
+      <div class="note-greet">Dear Property Owner,</div>
+      <p>We are a close-knit Maharashtrian family of five — parents, the two of us, and our little one — currently living in Dadar where we own two small homes. We are looking to move into a larger space that can comfortably accommodate our elderly parents and give our young son room to grow.</p>
+      <p>Both of us are employed with reputed MNCs and are financially stable. Our rent budget is up to <strong id="rentInNote">₹65,000</strong> per month. We treat every home we live in with care and are happy to share salary slips, Aadhaar, employment letters, and police verification at your convenience.</p>
+      <p>We hope to build a long-term, respectful relationship with you. Thank you for considering our family.</p>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="ftr">
+    <div class="ftr-txt">Shared in good faith for your reference &amp; consideration</div>
+    <div class="ftr-dots">
+      <div class="ftr-dot"></div>
+      <div class="ftr-dot"></div>
+      <div class="ftr-dot"></div>
+    </div>
+  </div>
+
+</div><!-- /sheet -->
+</div><!-- /page-wrap -->
+
+<script>
+  const input   = document.getElementById('rentInput');
+  const display = document.getElementById('rentDisplay');
+  const noteAmt = document.getElementById('rentInNote');
+
+  function fmt(n) {
+    const v = parseInt(n);
+    if (!v || v < 0) return '₹0';
+    return '₹' + v.toLocaleString('en-IN');
+  }
+
+  function update() {
+    const s = fmt(input.value);
+    display.textContent = s;
+    noteAmt.textContent = s;
+  }
+
+  input.addEventListener('input', update);
+  update();
+</script>
+</body>
+</html>
